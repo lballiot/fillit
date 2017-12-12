@@ -6,7 +6,7 @@
 /*   By: lballiot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:02:27 by lballiot          #+#    #+#             */
-/*   Updated: 2017/12/12 11:03:04 by lballiot         ###   ########.fr       */
+/*   Updated: 2017/12/12 13:54:06 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/uio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 typedef	struct	    struct_list
 {

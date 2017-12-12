@@ -13,17 +13,35 @@ static int		ft_check_number_arg(int ac)
 	return (1);
 }
 
-char			*ft_check(char *str)
+int				ft_check(char *str)
 {
 	int i;
 	size_t sharp;
+	//	size_t backn = 0;
+	int j = 0;
 
 	i = 0;
 	sharp = 0;
 	if (!str)
-		return (NULL);
+		return (-1);
+	if (ft_strlen(str) > 545)
+		return (-1);
 	while (str)
 	{
+		if (str[i] != '.' && str[i] != '#' && str[i] != '\n')
+			return (-1);
+/*		while (str[i] != '\n')
+		{
+			j++;
+			i++;
+			printf("i : %d\n", i);
+			printf("j : %d\n", j);
+		}
+*/
+
+		printf("j : %d\n", j);
+		if (str[i] == '\n' && j != 4)
+			return (-1);
 		if (str[i] == '\n' && str[i + 1] == '\n')
 		{
 			sharp += 1;
@@ -31,7 +49,8 @@ char			*ft_check(char *str)
 		}
 		i++;
 	}
-	return (str);
+	write(1, "toto\n", 5);
+	return (0);
 }
 
 
@@ -42,6 +61,7 @@ int				main(int ac, char **av)
 	char	*buf;
 	char	*str_tetra;
 	int		read_file;
+	int		check;
 
 	read_file = 0;
 	open_file = 0;
@@ -72,6 +92,12 @@ int				main(int ac, char **av)
 	{
 		ft_putstr_fd("close() failed\n", 2);
 		return (1);
+	}
+	check = ft_check(str_tetra);
+	if (check == -1)
+	{
+		ft_putstr_fd("error\n", 2);
+		return (0);
 	}
 	return (0);
 }
