@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:28:40 by rvolberg          #+#    #+#             */
-/*   Updated: 2017/12/12 15:55:15 by rvolberg         ###   ########.fr       */
+/*   Updated: 2017/12/12 18:11:39 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void ft_print_tetra(char **tab)
 	
 	while (tab[i])
 	{
+		ft_putstr("tetramino numero tableau ");
+		ft_putnbr(i);
+		ft_putstr(" :\n");
 		ft_putstr(tab[i]);
 		i++;
 	}
@@ -83,11 +86,11 @@ static char			**ft_read(int o_fd)
 	tab_tetra = NULL;
 	i = 0;
 	read_fd = 0;
-	str_tetra = ft_strnew(21);
-	buf = ft_strnew(21);
+	str_tetra = ft_strnew(21);//
+	buf = ft_strnew(21);//
 
-
-	while ((read_fd = read(o_fd, buf, 21)) > 0)
+//perte du dernier \n du dernier tetra ds read, rajouter quelque part a la main
+	while ((read_fd = read(o_fd, buf, 21)) > 0) 
 	{
 		buf[read_fd] = '\0';
 // verification du tetra dans le buf
@@ -95,14 +98,14 @@ static char			**ft_read(int o_fd)
 		buf = ft_strnew(21);
 		i++;
 	}
-
 	free(buf);
+//	ft_putstr(str_tetra);//
 	tab_tetra = ft_tetra_divider(str_tetra, i);
 
 	if (read_fd == -1)
 	{
 		ft_putstr_fd("read() failed\n", 2);
-		tab_tetra[1] = "read() failed\n";
+		tab_tetra[0] = "read() failed\n";//
 		return(tab_tetra);
 	}
 	

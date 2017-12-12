@@ -6,15 +6,46 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:15:47 by rvolberg          #+#    #+#             */
-/*   Updated: 2017/12/12 15:55:18 by rvolberg         ###   ########.fr       */
+/*   Updated: 2017/12/12 18:03:21 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+/*
+** change les '#' en alphabetique dans l'ordre d'arrive
+*/
+
+static char			 **ft_tetra_is_alpha(char **tab)
+{
+	int x;
+	unsigned int y;
+	int a;
+
+	a = 'A';
+	x = 0;
+	y = 0;
+	while (tab[y])
+	{
+		while (tab[y][x] != '\0')
+		{
+			if(tab[y][x] == '#')
+				tab[y][x] = a;
+			x++;
+		}
+		x = 0;
+		y++;
+		a++;
+	}
+	return (tab);
+}
+
+/*
+** transforme chaine de caractere en tableau ** de char
+*/
+
 char 				**ft_tetra_divider(char *str, unsigned int i)
 {
-
 	char **tab;
 	unsigned int y;
 	unsigned int x;
@@ -22,7 +53,7 @@ char 				**ft_tetra_divider(char *str, unsigned int i)
 	y = 0;
 	x = 0;
 	tab = NULL;
-	if(!(tab = (char**)malloc(sizeof(char*) * (i + 1))))
+	if(!(tab = (char**)malloc(sizeof(char*) * (i))))
 		return (NULL);
 	if (ft_strequ(str, ""))
 	{
@@ -36,8 +67,9 @@ char 				**ft_tetra_divider(char *str, unsigned int i)
 			x = x + 21;
 			y++;	
 		}
-	}				
-	tab[y + 1] = NULL;
+	}
+	tab[i] = NULL;//
+	tab = ft_tetra_is_alpha(tab);
 	return (tab);
 }
 
@@ -46,6 +78,22 @@ char 				**ft_tetra_divider(char *str, unsigned int i)
 
 
 /*
+
+x
+	y = 0;//
+		while (y < i)
+	{
+		ft_putstr("\ntetramino avant alpha ");
+		ft_putnbr(y);
+		ft_putstr(" :\n");
+		ft_putstr(tab[y]);
+		y++;
+		}			
+
+
+
+
+
 static size_t 		ft_tetra_count(char const *str)
 {
 	int				i;
