@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lballiot <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/12/12 10:49:26 by lballiot          #+#    #+#              #
-#    Updated: 2017/12/13 10:18:57 by lballiot         ###   ########.fr        #
+#    Created: 2017/12/07 11:00:28 by rvolberg          #+#    #+#              #
+#    Updated: 2017/12/12 14:46:04 by rvolberg         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME = fillit
 
@@ -18,7 +18,7 @@ SRC = *.c
 
 OBJ = $(SRC:.c=.o)
 
-INCLUDE = -I ./includes
+INCLUDE = -I ./includes/
 
 FLAGS += -Wall -Werror -Wextra
 
@@ -30,8 +30,6 @@ LIBFT_LINK = -L $(LIBFT_PATH) -lft
 
 LIBFT = ./libft/libft.a
 
-RM = rm -rf
-
 all: $(NAME)
 
 LIBFT_CC:
@@ -40,14 +38,26 @@ LIBFT_CC:
 $(NAME): LIBFT_CC
 	$(CC) -c $(FLAGS) $(SRC_PATH)$(SRC) $(INCLUDE)
 	$(CC) -o $(NAME) $(FLAGS) $(OBJ) $(LIBFT_LINK)
-
 clean:
-	$(RM) $(OBJ)
+	rm -f $(OBJ)
 	make -C $(LIBFT_PATH) clean
-
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 	make -C $(LIBFT_PATH) fclean
-
 re: fclean all
 	make -C $(LIBFT_PATH) re
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,60 +6,78 @@
 /*   By: lballiot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:56:52 by lballiot          #+#    #+#             */
-/*   Updated: 2017/12/13 10:59:05 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/10 10:56:42 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-int		ft_check(char *str)
+static l_struct		ft_check2(l_struct l, char *str)
 {
-	int i;
-	size_t sharp;
-	size_t point = 0;
+	if (str[l.i] == '#')
+		l.sharp++;
+	if (str[l.i] == '.')
+		l.point++;
+	if (str[l.i] == '\n' && str[l.i + 1] != '\n')
+		l.backn++;
+	if (str[l.i] != '\n' && str[l.i] != '\0')
+		l.c++;
+	if (str[l.i] == '#' && str[l.i - 5] == '#')
+		l.bonds++;
+	if (str[l.i] == '#' && str[l.i - 1] == '#')
+		l.bonds++;
+	if (str[l.i] == '#' && str[l.i + 1] == '#')
+		l.bonds++;
+	if (str[l.i] == '#' && str[l.i + 5] == '#')
+		l.bonds++;
+	return (l);
+}
 
-	i = -1;
-	sharp = 0;
+static l_struct		ft_check3(l_struct l, char *str)
+{
+	if (str[l.i] != '.' && str[l.i] != '#' && str[l.i] != '\n'
+			&& str[l.i] != '\0')
+		l.t = -1;
+	if (str[l.i] == '\n' && str[l.i + 1] != '\0')
+	{
+		if (l.c != 4)
+			l.t = -1;
+		l.c = 0;
+	}
+	if ((str[l.i] == '\n' && str[l.i - 1] == '\n') || (str[l.i + 1] == '\0'
+				&& str[l.i] == '\n'))
+	{
+		if (l.sharp != 4 || l.point != 12 || l.backn != 4 || l.bonds <= 4)
+			l.t = -1;
+		l.sharp = 0;
+		l.point = 0;
+		l.backn = 0;
+	}
+	return (l);
+}
+
+int					ft_check(char *str, int tetra)
+{
+	l_struct l;
+
+	l.point = 0;
+	l.backn = 0;
+	l.bonds = 0;
+	l.i = 0;
+	l.sharp = 0;
+	l.c = 0;
+	l.t = 0;
 	if (!str)
-	{
-		write(1, "\nif nothing\n", 12);
 		return (-1);
-	}
-	if (ft_strlen(str) > 545)
-	{
-		printf("\nstrlen\n");
+	if (tetra > 545 || tetra < 20)
 		return (-1);
-	}
-	while (str[++i])
+	while (str[l.i])
 	{
-		if (str[i] != '.' && str[i] != '#' && str[i] != '\n' && str[i] != '\0')
-		{
-			printf("\n!= . # /n\n");
+		l = ft_check2(l, str);
+		l = ft_check3(l, str);
+		if (l.t == -1)
 			return (-1);
-		}
-		if (str[i] == '#')
-		{
-			sharp++;
-//			printf("# : %zu\n", sharp);
-		}
-		if (str[i] == '.')
-			point++;
-		if (str[i] == '\n' && str[i - 1] == '\n')
-		{
-			if (sharp != 4)
-			{
-				printf("\nsharp != 4\n");
-				return (-1);
-			}
-			if (point != 12)
-			{
-				printf("\npoint != 12\n");
-				return (-1);
-			}
-			sharp = 0;
-			point = 0;
-		}
+		l.i++;
 	}
-//	write(1, "toto\n", 5);
 	return (0);
-}	
+}
