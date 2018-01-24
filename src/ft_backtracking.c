@@ -6,11 +6,11 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 13:07:58 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/23 16:43:05 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/24 13:38:04 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
 /*
 ** function that checks what char is in the tetra and returns it
@@ -30,7 +30,7 @@ char		ft_chartetra(char *tetra)
 ** function that adds a link to the l_tetra struct
 */
 
-void		ft_ltetradd(l_tetra **list, l_tetra *new)
+void		ft_ltetradd(t_tetra **list, t_tetra *new)
 {
 	new->next = *list;
 	*list = new;
@@ -40,10 +40,10 @@ void		ft_ltetradd(l_tetra **list, l_tetra *new)
 ** reverse the links in list
 */
 
-l_tetra		*ft_lstrev(l_tetra *list)
+t_tetra		*ft_lstrev(t_tetra *list)
 {
-	l_tetra *temp;
-	l_tetra *rev;
+	t_tetra *temp;
+	t_tetra *rev;
 
 	temp = NULL;
 	rev = NULL;
@@ -61,10 +61,10 @@ l_tetra		*ft_lstrev(l_tetra *list)
 ** function that fill list with all the tetra
 */
 
-l_tetra		*ft_list(char **tetra, size_t i)
+t_tetra		*ft_list(char **tetra, size_t i)
 {
-	l_tetra		*list;
-	l_tetra		*temp;
+	t_tetra		*list;
+	t_tetra		*temp;
 	size_t		c;
 	char		alpha;
 
@@ -89,8 +89,8 @@ l_tetra		*ft_list(char **tetra, size_t i)
 void		ft_backtracking(char **tab_tetra, size_t i)
 {
 	size_t		sq;
-	s_str		*map;
-	l_tetra		*list;
+	t_str		*map;
+	t_tetra		*list;
 
 	list = NULL;
 	sq = ft_sqrt_tetra(i * 4);

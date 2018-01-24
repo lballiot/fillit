@@ -6,17 +6,17 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 13:09:55 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/23 16:23:05 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/24 13:39:56 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
 /*
 ** function that removes a tetra in the tab
 */
 
-void	ft_remove(char c, s_str *map)
+void	ft_remove(char c, t_str *map)
 {
 	size_t x;
 	size_t y;
@@ -40,7 +40,7 @@ void	ft_remove(char c, s_str *map)
 ** function that puts a tetra in the tab
 */
 
-void	ft_place(char c, s_str *map, l_tetra *list, int *tab)
+void	ft_place(char c, t_str *map, t_tetra *list, int *tab)
 {
 	int n;
 	int i;
@@ -63,7 +63,7 @@ void	ft_place(char c, s_str *map, l_tetra *list, int *tab)
 ** function that checks the space for a tetra form a particular x and y
 */
 
-int		ft_check_place(l_tetra *list, s_str *map, int x, int y)
+int		ft_check_place(t_tetra *list, t_str *map, int x, int y)
 {
 	int i;
 	int j;
@@ -93,11 +93,10 @@ int		ft_check_place(l_tetra *list, s_str *map, int x, int y)
 ** solving function : check space and next space
 */
 
-int		ft_tetra_in_str(l_tetra *list, s_str *map)
+int		ft_tetra_in_str(t_tetra *list, t_str *map)
 {
 	int		x;
 	int		y;
-	l_tetra	*temp;
 
 	y = -1;
 	if (list == NULL)
@@ -111,9 +110,8 @@ int		ft_tetra_in_str(l_tetra *list, s_str *map)
 			{
 				if (ft_tetra_in_str(list->next, map) != 1)
 				{
-					temp = list->next;
 					ft_remove(list->c, map);
-					ft_remove(temp->c, map);
+					ft_remove((list->next)->c, map);
 				}
 				else
 					return (1);

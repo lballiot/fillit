@@ -6,13 +6,18 @@
 /*   By: lballiot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:56:52 by lballiot          #+#    #+#             */
-/*   Updated: 2018/01/10 10:56:42 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/24 22:18:00 by karakhirn        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-static l_struct		ft_check2(l_struct l, char *str)
+/*
+** function that count the number of link between #, the #,'\n', '.'
+** and the total number of char
+*/
+
+static t_struct		ft_check2(t_struct l, char *str)
 {
 	if (str[l.i] == '#')
 		l.sharp++;
@@ -30,10 +35,16 @@ static l_struct		ft_check2(l_struct l, char *str)
 		l.bonds++;
 	if (str[l.i] == '#' && str[l.i + 5] == '#')
 		l.bonds++;
+	if (str[l.i] == '\n' && str[l.i + 1] == '\0' && str[l.i - 1] == '\n')
+		l.t = -1;
 	return (l);
 }
 
-static l_struct		ft_check3(l_struct l, char *str)
+/*
+** function that checks the numbers found to see if the tetra is valid
+*/
+
+static t_struct		ft_check3(t_struct l, char *str)
 {
 	if (str[l.i] != '.' && str[l.i] != '#' && str[l.i] != '\n'
 			&& str[l.i] != '\0')
@@ -56,9 +67,13 @@ static l_struct		ft_check3(l_struct l, char *str)
 	return (l);
 }
 
+/*
+** main function to check the tetraminos, if (-1) : error
+*/
+
 int					ft_check(char *str, int tetra)
 {
-	l_struct l;
+	t_struct l;
 
 	l.point = 0;
 	l.backn = 0;

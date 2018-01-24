@@ -6,14 +6,14 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:15:47 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/23 16:50:16 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/24 14:03:33 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
 /*
-** change les '#' en alphabetique dans l'ordre d'arrive
+** function that changes the '#' (sharp) in Alphabet, in order of arrival
 */
 
 static char		**ft_tetra_is_alpha(char **tab)
@@ -41,7 +41,8 @@ static char		**ft_tetra_is_alpha(char **tab)
 }
 
 /*
-** transforme chaine de caractere en tableau ** de char
+** function that separate the char* of tetra in char** each with
+** only one tetra
 */
 
 char			**ft_tetra_divider(char *str, size_t i)

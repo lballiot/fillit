@@ -6,14 +6,14 @@
 /*   By: lballiot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 15:54:37 by lballiot          #+#    #+#             */
-/*   Updated: 2018/01/23 16:52:09 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/24 13:40:46 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
 /*
-** fct qui calcule le carre le plus proche (supperieur) pour la taille d'str
+** function that find the square root to use to find the smallest square
 */
 
 size_t	ft_sqrt_tetra(size_t nb)
@@ -38,17 +38,17 @@ size_t	ft_sqrt_tetra(size_t nb)
 }
 
 /*
-** ft qui cree et remplie la structure str
+** function that create and fill the final struct
 */
 
-s_str	*ft_str_struct_maker(size_t sq, size_t i)
+t_str	*ft_str_struct_maker(size_t sq, size_t i)
 {
-	s_str	*map;
+	t_str	*map;
 	size_t	x;
 	size_t	y;
 
 	x = 0;
-	if (!(map = (s_str*)malloc(sizeof(s_str))))
+	if (!(map = (t_str*)malloc(sizeof(t_str))))
 		return (NULL);
 	map->sq = sq;
 	map->i = i;

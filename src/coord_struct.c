@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_tetra.c                                     :+:      :+:    :+:   */
+/*   coord_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/12 18:07:20 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/23 16:46:24 by lballiot         ###   ########.fr       */
+/*   Created: 2018/01/24 13:36:06 by rvolberg          #+#    #+#             */
+/*   Updated: 2018/01/24 13:40:17 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
 /*
 ** function that changes the coordinate to place them in the upper left corner
 */
 
-l_tetra		*ft_initial_move_tetra(l_tetra *list)
+t_tetra		*ft_initial_move_tetra(t_tetra *list)
 {
 	int i;
 	int x;
@@ -47,13 +47,13 @@ l_tetra		*ft_initial_move_tetra(l_tetra *list)
 ** function that creates and fill a link for
 */
 
-l_tetra		*ft_lst_tetra(int *a, int *b, char c, int nb)
+t_tetra		*ft_lst_tetra(int *a, int *b, char c, int nb)
 {
-	l_tetra	*maillon;
+	t_tetra	*maillon;
 	int		i;
 
 	i = 0;
-	if (!(maillon = (l_tetra*)malloc(sizeof(l_tetra))))
+	if (!(maillon = (t_tetra*)malloc(sizeof(t_tetra))))
 		return (NULL);
 	if ((a) && (b))
 	{
@@ -75,12 +75,12 @@ l_tetra		*ft_lst_tetra(int *a, int *b, char c, int nb)
 }
 
 /*
-** fonction qui trouve les coordonnes a placer dans la structure list
+** funtion that find the coordinate of the tetra to send it to t_tetra
 */
 
-l_tetra		*ft_tetra_coord(char *tab, l_tetra *list, char c, int nb)
+t_tetra		*ft_tetra_coord(char *tab, t_tetra *list, char c, int nb)
 {
-	l_struct l;
+	t_struct l;
 
 	l.t = -1;
 	l.vertical = 0;
