@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:28:40 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/24 22:21:42 by karakhirn        ###   ########.fr       */
+/*   Updated: 2018/01/26 12:49:52 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,21 @@ char	**ft_read(int o_fd, char **tab_tetra)
 	counter = 0;
 	str_tetra = ft_strnew(21);
 	buf = ft_strnew(21);
-	while (read(o_fd, buf, 21) > 0)
+	ft_putstr("o_fd = ");
+	ft_putnbr(o_fd);
+	ft_putstr("\nread = ");
+	ft_putnbr(read(o_fd, buf, 21));
+	if (read(o_fd, buf, 21) == 0)
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
+	ft_putstr("\n\nafter if \no_fd = ");
+	ft_putnbr(o_fd);
+	ft_putstr("\nread = ");
+	ft_putnbr(read(o_fd, buf, 21));
+//	after the condition the read if going one tetraminos after the beginning 
+	while ((read(o_fd, buf, 21)) > 0)
 	{
 		tetra += ft_strlen(buf);
 		if (ft_check(buf, tetra) == -1)
@@ -75,14 +89,13 @@ char	**ft_read(int o_fd, char **tab_tetra)
 		counter++;
 	}
 	free(buf);
-	if (str_tetra[0] == '\0')
+	tab_tetra = ft_tetra_divider(str_tetra, counter);
+	ft_putstr("toto\n");
+	if (tab_tetra == NULL)
 	{
 		ft_putstr("error\n");
 		return (0);
 	}
-	tab_tetra = ft_tetra_divider(str_tetra, counter);
-	if (tab_tetra == NULL)
-		return (0);
 	ft_backtracking(tab_tetra, counter);
 	return (tab_tetra);
 }
@@ -103,6 +116,8 @@ int		main(int argc, char **argv)
 	if (open_fd == -1)
 		return (0);
 	tab_tetra = ft_read(open_fd, tab_tetra);
+	if (tab_tetra == NULL)
+		return (0);
 	if (close(open_fd) == -1)
 	{
 		ft_putstr_fd("close() failed\n", 2);

@@ -6,7 +6,7 @@
 /*   By: lballiot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 10:56:52 by lballiot          #+#    #+#             */
-/*   Updated: 2018/01/24 22:18:00 by karakhirn        ###   ########.fr       */
+/*   Updated: 2018/01/24 11:11:16 by rvolberg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static t_struct		ft_check2(t_struct l, char *str)
 		l.bonds++;
 	if (str[l.i] == '#' && str[l.i + 5] == '#')
 		l.bonds++;
-	if (str[l.i] == '\n' && str[l.i + 1] == '\0' && str[l.i - 1] == '\n')
-		l.t = -1;
 	return (l);
 }
 

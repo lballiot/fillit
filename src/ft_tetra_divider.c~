@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:15:47 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/26 12:48:23 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/26 11:24:05 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,9 @@ char			**ft_tetra_divider(char *str, size_t i)
 
 	tmp = i - 1;
 	ind = 0;
-	ft_putstr("\n\nstr =\n");
-	ft_putstr(str);
-	ft_putstr("= str\n");
 	if (!(tab = (char **)malloc(sizeof(char *) * i + 1)))
 		return (NULL);
 	tab[i] = NULL;
-
 	while (i > 0)
 	{
 		tab[ind] = ft_strnew(22);
@@ -73,7 +69,5 @@ char			**ft_tetra_divider(char *str, size_t i)
 	ind = ft_strlen(tab[tmp]) - 1;
 	if (tab[tmp][ind] == '\n' && tab[tmp][ind - 1] == '\n')
 		return (NULL);
-	ft_putstr("\ntiti\n");
-
 	return (ft_tetra_is_alpha(tab));
 }
