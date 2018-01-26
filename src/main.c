@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:28:40 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/26 12:49:52 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/26 15:43:42 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,44 +57,36 @@ char	**ft_read(int o_fd, char **tab_tetra)
 	char	*str_tetra;
 	size_t	counter;
 	int		tetra;
+	int		tmp;
 
 	tetra = 0;
 	counter = 0;
 	str_tetra = ft_strnew(21);
 	buf = ft_strnew(21);
-	ft_putstr("o_fd = ");
-	ft_putnbr(o_fd);
-	ft_putstr("\nread = ");
-	ft_putnbr(read(o_fd, buf, 21));
-	if (read(o_fd, buf, 21) == 0)
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("\n\nafter if \no_fd = ");
-	ft_putnbr(o_fd);
-	ft_putstr("\nread = ");
-	ft_putnbr(read(o_fd, buf, 21));
-//	after the condition the read if going one tetraminos after the beginning 
-	while ((read(o_fd, buf, 21)) > 0)
+	tmp = 0;
+	while ((tmp = read(o_fd, buf, 21)) > 0)
 	{
 		tetra += ft_strlen(buf);
 		if (ft_check(buf, tetra) == -1)
 		{
 			ft_putstr("error\n");
-			return (0);
+			exit(EXIT_FAILURE);
 		}
 		str_tetra = ft_strjoin(str_tetra, buf);
 		buf = ft_strnew(21);
 		counter++;
 	}
 	free(buf);
+	if (tmp == 0 && str_tetra[0] == '\0')
+	{
+		ft_putstr("error\n");
+		exit(EXIT_FAILURE);
+	}
 	tab_tetra = ft_tetra_divider(str_tetra, counter);
-	ft_putstr("toto\n");
 	if (tab_tetra == NULL)
 	{
 		ft_putstr("error\n");
-		return (0);
+		exit(EXIT_FAILURE);
 	}
 	ft_backtracking(tab_tetra, counter);
 	return (tab_tetra);
