@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:44:05 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/24 11:25:57 by rvolberg         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:05:02 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int					ft_check(char *str, int tetra);
 char				**ft_tetra_divider(char *str, size_t i);
 int					ft_check_number_arg(int ac);
 int					ft_open(char **av);
-char				**ft_read(int o_fd, char **tab_tetra);
+void				ft_read(int o_fd, char **tab_tetra);
 
 #endif

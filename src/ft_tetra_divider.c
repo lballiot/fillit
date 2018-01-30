@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:15:47 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/26 15:28:26 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:02:04 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char			**ft_tetra_divider(char *str, size_t i)
 	while (i > 0)
 	{
 		tab[ind] = ft_strnew(22);
+		cpy = ft_strnew(ft_strlen(str));
 		cpy = ft_strcpy(cpy, str);
 		tab[ind] = ft_strncpy(tab[ind], cpy, 21);
 		str = str + 21;

@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:28:40 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/26 15:43:42 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:06:06 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** the usage of the program
 */
 
-int		ft_check_number_arg(int ac)
+int			ft_check_number_arg(int ac)
 {
 	char	*usage;
 
@@ -35,7 +35,7 @@ int		ft_check_number_arg(int ac)
 ** function that open the iput file
 */
 
-int		ft_open(char **argv)
+int			ft_open(char **argv)
 {
 	int		open_fd;
 
@@ -47,11 +47,32 @@ int		ft_open(char **argv)
 }
 
 /*
+** continuation of the function ft_read
+*/
+
+static char	**ft_read2(int tmp, char *str, char **tab, size_t counter)
+{
+	if (tmp == 0 && str[0] == '\0')
+	{
+		ft_putstr("error\n");
+		exit(EXIT_FAILURE);
+	}
+	tab = ft_tetra_divider(str, counter);
+	if (tab == NULL)
+	{
+		ft_putstr("error\n");
+		exit(EXIT_FAILURE);
+	}
+	ft_backtracking(tab, counter);
+	return (tab);
+}
+
+/*
 ** function that reads the input file and send it to the function
 ** that changes it to a char**
 */
 
-char	**ft_read(int o_fd, char **tab_tetra)
+void		ft_read(int o_fd, char **tab_tetra)
 {
 	char	*buf;
 	char	*str_tetra;
@@ -77,26 +98,14 @@ char	**ft_read(int o_fd, char **tab_tetra)
 		counter++;
 	}
 	free(buf);
-	if (tmp == 0 && str_tetra[0] == '\0')
-	{
-		ft_putstr("error\n");
-		exit(EXIT_FAILURE);
-	}
-	tab_tetra = ft_tetra_divider(str_tetra, counter);
-	if (tab_tetra == NULL)
-	{
-		ft_putstr("error\n");
-		exit(EXIT_FAILURE);
-	}
-	ft_backtracking(tab_tetra, counter);
-	return (tab_tetra);
+	ft_read2(tmp, str_tetra, tab_tetra, counter);
 }
 
 /*
 ** main function
 */
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		open_fd;
 	char	**tab_tetra;
@@ -107,7 +116,7 @@ int		main(int argc, char **argv)
 	open_fd = ft_open(argv);
 	if (open_fd == -1)
 		return (0);
-	tab_tetra = ft_read(open_fd, tab_tetra);
+	ft_read(open_fd, tab_tetra);
 	if (tab_tetra == NULL)
 		return (0);
 	if (close(open_fd) == -1)
