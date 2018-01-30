@@ -6,7 +6,7 @@
 /*   By: lballiot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 15:54:37 by lballiot          #+#    #+#             */
-/*   Updated: 2018/01/24 13:40:46 by rvolberg         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:42:43 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_str	*ft_str_struct_maker(size_t sq, size_t i)
 	size_t	x;
 	size_t	y;
 
-	x = 0;
+	x = -1;
 	if (!(map = (t_str*)malloc(sizeof(t_str))))
 		return (NULL);
 	map->sq = sq;
@@ -55,14 +55,13 @@ t_str	*ft_str_struct_maker(size_t sq, size_t i)
 	if (!(map->str = (char**)malloc(sizeof(char*) * (sq))))
 		return (NULL);
 	map->str[sq] = NULL;
-	while (x < sq)
+	while (++x < sq)
 	{
 		map->str[x] = ft_strnew(sq + 1);
 		y = 0;
 		while (y < sq)
 			map->str[x][y++] = '.';
 		map->str[x][y] = '\n';
-		x++;
 	}
 	return (map);
 }

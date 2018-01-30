@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 13:07:58 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/24 13:38:04 by rvolberg         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:33:57 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ t_tetra		*ft_list(char **tetra, size_t i)
 	char		alpha;
 
 	list = NULL;
-	c = 0;
-	while (c < i)
+	c = -1;
+	while (++c < i)
 	{
 		temp = NULL;
 		alpha = ft_chartetra(tetra[c]);
 		temp = ft_tetra_coord(tetra[c], temp, alpha, c);
 		ft_ltetradd(&list, temp);
-		c++;
 	}
 	list = ft_lstrev(list);
 	return (list);
@@ -98,7 +97,7 @@ void		ft_backtracking(char **tab_tetra, size_t i)
 	list = ft_list(tab_tetra, i);
 	while ((ft_tetra_in_str(list, map)) != 1)
 	{
-		i = i + 1;
+		i += 1;
 		sq = ft_sqrt_tetra(i * 4);
 		map = ft_str_struct_maker(sq, i);
 	}

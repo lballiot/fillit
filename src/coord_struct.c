@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:36:06 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/30 11:16:37 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:31:16 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,15 @@ t_tetra		*ft_initial_move_tetra(t_tetra *list)
 
 	x = list->x[0];
 	y = list->y[0];
-	i = 0;
-	while (i < 4)
-	{
+	i = -1;
+	while (++i < 4)
 		if (list->x[i] < x)
-		{
 			x = list->x[i];
-		}
-		i++;
-	}
-	i = 0;
-	while (i < 4)
+	i = -1;
+	while (++i < 4)
 	{
 		list->x[i] = list->x[i] - x;
 		list->y[i] = list->y[i] - y;
-		i++;
 	}
 	return (list);
 }
@@ -52,7 +46,7 @@ t_tetra		*ft_lst_tetra(int *a, int *b, char c, int nb)
 	t_tetra	*maillon;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (!(maillon = (t_tetra*)malloc(sizeof(t_tetra))))
 		return (NULL);
 	if ((a) && (b))
@@ -63,11 +57,10 @@ t_tetra		*ft_lst_tetra(int *a, int *b, char c, int nb)
 			return (NULL);
 		maillon->c = c;
 		maillon->nb = nb;
-		while (i <= 3)
+		while (++i <= 3)
 		{
 			maillon->x[i] = a[i];
 			maillon->y[i] = b[i];
-			i++;
 		}
 	}
 	maillon->next = NULL;

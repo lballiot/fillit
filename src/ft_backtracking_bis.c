@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 13:09:55 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/24 13:39:56 by rvolberg         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:37:15 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,14 @@ void	ft_remove(char c, t_str *map)
 	size_t x;
 	size_t y;
 
-	x = 0;
-	y = 0;
-	while (y < map->sq)
+	x = -1;
+	y = -1;
+	while (++y < map->sq)
 	{
-		while (x < map->sq)
-		{
+		while (++x < map->sq)
 			if (map->str[y][x] == c)
 				map->str[y][x] = '.';
-			x++;
-		}
-		x = 0;
-		y++;
+		x = -1;
 	}
 }
 
@@ -46,16 +42,15 @@ void	ft_place(char c, t_str *map, t_tetra *list, int *tab)
 	int i;
 	int j;
 
-	n = 0;
+	n = -1;
 	j = 0;
 	i = 0;
-	while (n < 4)
+	while (++n < 4)
 	{
 		i = tab[0] - list->x[0] + list->x[n];
 		j = tab[1] - list->y[0] + list->y[n];
 		if (map->str[j][i] == '.')
 			map->str[j][i] = c;
-		n++;
 	}
 }
 
@@ -70,12 +65,12 @@ int		ft_check_place(t_tetra *list, t_str *map, int x, int y)
 	int c;
 	int tab[2];
 
-	c = 0;
+	c = -1;
 	j = 0;
 	i = 0;
 	tab[0] = x;
 	tab[1] = y;
-	while (c < 4)
+	while (++c < 4)
 	{
 		i = x - list->x[0] + list->x[c];
 		j = y - list->y[0] + list->y[c];
@@ -83,7 +78,6 @@ int		ft_check_place(t_tetra *list, t_str *map, int x, int y)
 			return (-1);
 		if (map->str[j][i] != '.')
 			return (-1);
-		c++;
 	}
 	ft_place(list->c, map, list, tab);
 	return (1);
@@ -105,7 +99,6 @@ int		ft_tetra_in_str(t_tetra *list, t_str *map)
 	{
 		x = -1;
 		while (++x < (int)map->sq)
-		{
 			if (ft_check_place(list, map, x, y) == 1)
 			{
 				if (ft_tetra_in_str(list->next, map) != 1)
@@ -116,7 +109,6 @@ int		ft_tetra_in_str(t_tetra *list, t_str *map)
 				else
 					return (1);
 			}
-		}
 	}
 	return (0);
 }

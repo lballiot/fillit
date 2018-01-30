@@ -6,7 +6,7 @@
 /*   By: rvolberg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 11:15:47 by rvolberg          #+#    #+#             */
-/*   Updated: 2018/01/30 11:02:04 by lballiot         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:40:56 by lballiot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ static char		**ft_tetra_is_alpha(char **tab)
 	int		a;
 
 	a = 'A';
-	x = 0;
-	y = 0;
-	while (tab[y])
+	x = -1;
+	y = -1;
+	while (tab[++y])
 	{
-		while (tab[y][x] != '\0')
+		while (tab[y][++x] != '\0')
 		{
 			if (tab[y][x] == '#')
 				tab[y][x] = a;
-			x++;
 		}
-		x = 0;
-		y++;
+		x = -1;
 		a++;
 	}
 	return (tab);
@@ -57,14 +55,13 @@ char			**ft_tetra_divider(char *str, size_t i)
 	if (!(tab = (char **)malloc(sizeof(char *) * i + 1)))
 		return (NULL);
 	tab[i] = NULL;
-	while (i > 0)
+	while (i-- > 0)
 	{
 		tab[ind] = ft_strnew(22);
 		cpy = ft_strnew(ft_strlen(str));
 		cpy = ft_strcpy(cpy, str);
 		tab[ind] = ft_strncpy(tab[ind], cpy, 21);
 		str = str + 21;
-		i--;
 		ind++;
 	}
 	ind = ft_strlen(tab[tmp]) - 1;
